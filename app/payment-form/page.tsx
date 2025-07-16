@@ -64,13 +64,13 @@ function PaymentFormContent() {
       document.body.removeChild(script);
     };
   }, []);
-  
+
   if (!product) {
     return <div>product not found</div>
   }
-  
+
   const { Name, Description, Amount, image } = product
-  
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log("Form Submitted", values);
     setLoading(true); // Show loader when submission starts
@@ -214,6 +214,23 @@ function PaymentFormContent() {
                 {loading ? <Loader className="animate-spin" size={24} /> : "Proceed with Payment"}
               </Button>
             </form>
+            {/* Test Card Info */}
+            <div className="mt-8 border-t pt-6 text-sm text-gray-700">
+              <h3 className="text-base font-semibold mb-2 text-gray-800">Test Payment Details</h3>
+              <p>💳 <span className="font-medium">Card (Success):</span> 4242 4242 4242 4242 — Exp: 12/30 — CVC: 123</p>
+              <p>💳 <span className="font-medium">Card (Declined):</span> 4000 0000 0000 0002 — Exp: 12/30 — CVC: 123</p>
+              <p className="mt-2">📱 <span className="font-medium">Mobile Money (Airtel):</span> 990000000 (Success), 990000001 (Fail)</p>
+              <p>📱 <span className="font-medium">Mobile Money (TNM):</span> 899817565 (Success), 899817566 (Fail)</p>
+              <p className="mt-2">🔐 <span className="font-medium">OTP:</span> 1234 for all 3DS tests</p>
+              <Link
+                href="https://developer.paychangu.com/docs/test"
+                className="text-blue-600 underline mt-2 inline-block"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                See Full Test Card List
+              </Link>
+            </div>
           </Form>
         </div>
       </div>
