@@ -12,14 +12,17 @@ export type LevelMeta = {
 export type LevelData = {
   amount: number;
   currency: "MWK" | "USD";
-  email: string;
-  first_name: string;
-  last_name: string;
   callback_url: string;
   return_url: string;
   tx_ref: string;
   customization?: LevelCustomization;
   meta?: LevelMeta;
+
+  customer: {
+    email: string;
+    first_name: string;
+    last_name: string;
+  };
 };
 
 // Types for transmitted in the callback triggered by PayChangu

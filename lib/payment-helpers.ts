@@ -7,7 +7,7 @@ export async function verifyTransaction(tx_ref: string) {
     {
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYCHANGU_SECRET_KEY}`,
+        Authorization: `Bearer ${process.env.PAYCHANGU_SECRET_KEY}`,
       },
     },
   );

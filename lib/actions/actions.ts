@@ -14,12 +14,14 @@ export async function checkout(values: z.infer<typeof formSchema>): Promise<stri
   const data: LevelData = {
     amount: values.amount,
     currency: values.currency,
-    email: values.email,
-    first_name: values.firstname,
-    last_name: values.lastname,
     callback_url: values.callbackUrl,
     return_url: values.returnUrl,
     tx_ref,
+    customer: {
+      email: values.email,
+      first_name: values.firstname,
+      last_name: values.lastname,
+    },
   };
 
   // Send a fetch request to the PayChangu API using your secret key and the data
@@ -28,7 +30,7 @@ export async function checkout(values: z.infer<typeof formSchema>): Promise<stri
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYCHANGU_SECRET_KEY}`,
+      Authorization: `Bearer ${process.env.PAYCHANGU_SECRET_KEY}`,
     },
     body: JSON.stringify(data),
   });

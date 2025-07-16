@@ -17,7 +17,6 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { generateTxRef, PopupSDK } from 'paychangu-js';
 import { useEffect, useState } from "react";
 import { Loader } from "lucide-react";
 import { products } from "@/lib";
@@ -43,8 +42,8 @@ export default function PaymentForm() {
       email: "",
       currency: "MWK",
       amount: Number(product.Amount) || 0,
-      callbackUrl: "https://yourdomain.com/api/finalize-payment", // Placeholder callback URL
-      returnUrl: "https://yourdomain.com/payment-success", // Placeholder return URL
+      callbackUrl: "http://localhost:3000/api/finalize-payment",
+      returnUrl: "http://localhost:3000/payment-success", 
     },
   });
 
