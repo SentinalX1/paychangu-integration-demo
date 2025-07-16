@@ -17,22 +17,17 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Loader } from "lucide-react";
 import { products } from "@/lib";
 import Link from "next/link";
 
 
-export default function PaymentForm() {
+function PaymentFormContent() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id")
   const product = products.find((p) => p.Id.toString() === id)
 
-  if (!product) {
-    return <div>product not found</div>
-  }
-
-  const { Name, Description, Amount, image } = product
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,7 +36,7 @@ export default function PaymentForm() {
       lastname: "",
       email: "",
       currency: "MWK",
-      amount: Number(product.Amount) || 0,
+      amount: Number(product?.Amount) || 0,
       callbackUrl: "http://localhost:3000/api/finalize-payment",
       returnUrl: "http://localhost:3000/payment-success", 
     },
@@ -69,7 +64,13 @@ export default function PaymentForm() {
       document.body.removeChild(script);
     };
   }, []);
-
+  
+  if (!product) {
+    return <div>product not found</div>
+  }
+  
+  const { Name, Description, Amount, image } = product
+  
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log("Form Submitted", values);
     setLoading(true); // Show loader when submission starts
@@ -224,4 +225,12 @@ export default function PaymentForm() {
       )}
     </div>
   )
+}
+
+export default function PaymentForm() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <PaymentFormContent />
+    </Suspense>
+  );
 }

@@ -20,7 +20,7 @@ export default function NotFound() {
         >
           404
         </FuzzyText>
-        <p className="mt-4 text-lg">Oops! The page you're looking for doesn't exist.</p>
+        <p className="mt-4 text-lg">Oops! The page you&apos;re looking for doesn&apos;t exist.</p>
         <Button onClick={() => router.push('/')} className="mt-4">
           Go back home
         </Button>

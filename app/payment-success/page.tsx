@@ -1,12 +1,14 @@
-"use client";
+'use client';
 
-import { useSearchParams } from "next/navigation";
-import { CheckCircleIcon } from "lucide-react";
-import Link from "next/link";
+import { useSearchParams } from 'next/navigation';
+import { CheckCircleIcon } from 'lucide-react';
+import Link from 'next/link';
+import { Suspense } from 'react';
 
-export default function PaymentSuccess() {
+// Component to handle the content that uses useSearchParams
+function PaymentSuccessContent() {
   const searchParams = useSearchParams();
-  const txRef = searchParams.get("tx_ref");
+  const txRef = searchParams.get('tx_ref');
 
   return (
     <>
@@ -42,5 +44,14 @@ export default function PaymentSuccess() {
         </Link>
       </main>
     </>
+  );
+}
+
+// Main component with Suspense boundary
+export default function PaymentSuccess() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PaymentSuccessContent />
+    </Suspense>
   );
 }
