@@ -32,4 +32,12 @@ export const products: Data[] = [
     image: "/products/abaya m1.webp",
     currency: "MWK"
 },
+{
+    Id: 9965625,
+    Name: "Sundress",
+    Description: "Black daisy Button Sundress.",
+    Amount: 15000,
+    image: "/products/sundress.webp",
+    currency: "MWK"
+},
 ]
