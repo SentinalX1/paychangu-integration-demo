@@ -29,11 +29,11 @@ This project demonstrates how to integrate PayChangu, a payment gateway platform
 ### Installation
 Clone the repository:
 ```bash
-git clone https://github.com/SentinalX1/Paychangu-test.git
+git clone https://github.com/SentinalX1/paychangu-integration-demo.git
 ```
 Navigate to the project directory:
 ```bash
-cd Paychangu-test
+cd paychangu-integration-demo
 ```
 ## Install dependencies:
 
