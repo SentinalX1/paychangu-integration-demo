@@ -47,7 +47,6 @@ function PaymentSuccessContent() {
   );
 }
 
-// Main component with Suspense boundary
 export default function PaymentSuccess() {
   return (
     <Suspense fallback={<div>Loading...</div>}>

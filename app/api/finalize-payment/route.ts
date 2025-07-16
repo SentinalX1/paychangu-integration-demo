@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import axios from 'axios';
+import { verifyTransaction } from '@/lib/payment-helpers'; // adjust path if needed
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -14,38 +14,28 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const secretKey = process.env.PAYCHANGU_SECRET_KEY;
-    if (!secretKey) {
-      throw new Error('Missing PAYCHANGU_SECRET_KEY in environment');
-    }
+    const verifiedStatus = await verifyTransaction(tx_ref);
 
-    const verifyUrl = `https://api.paychangu.com/verify-payment/${tx_ref}`;
+    if (verifiedStatus === 'success') {
+      console.log('✅ Payment verified successfully for:', tx_ref);
 
-    const { data } = await axios.get(verifyUrl, {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${secretKey}`,
-      },
-    });
+      // Optional: update DB, trigger email, etc
 
-    if (data.status === 'success') {
-      console.log('✅ Payment verified:', data);
-
-      // TODO: update DB, mark order as paid, etc.
-
-      return new Response(JSON.stringify({ message: 'Payment verified successfully', tx_ref }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return Response.redirect(
+        `https://paychangu-integration-demo.vercel.app/payment-success?tx_ref=${tx_ref}&status=${status}`,
+        302
+      );
     } else {
-      console.warn('❌ Payment not successful:', data);
-      return new Response(JSON.stringify({ message: 'Payment not successful', tx_ref }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      console.warn('❌ Payment verification failed for:', tx_ref);
+
+      return Response.redirect(
+        `https://paychangu-integration-demo.vercel.app/payment-failed?tx_ref=${tx_ref}&status=${status}`,
+        302
+      );
     }
   } catch (error) {
     console.error('❌ Error verifying payment:', error);
+
     return new Response(JSON.stringify({ message: 'Error verifying payment' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
