@@ -117,7 +117,13 @@ Homepage: ![App Screenshot](public/images/Screenshot1.webp)
 
 Payment Form: ![App Screenshot](public/images/Screenshot2.webp)
 
-PayChangu Popup: ![App Screenshot](public/images/Screenshot3.webp)
+PayChangu payment Popup: ![App Screenshot](public/images/Screenshot3.webp)
+
+PayChangu Visa process: ![App Screenshot](public/images/Screenshot4.webp)
+
+PayChangu Mobile payment options: ![App Screenshot](public/images/Screenshot5.webp)
+
+Success page: ![App Screenshot](public/images/Screenshot6.webp)
 
 ## License
 
