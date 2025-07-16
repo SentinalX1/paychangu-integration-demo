@@ -37,8 +37,8 @@ function PaymentFormContent() {
       email: "",
       currency: "MWK",
       amount: Number(product?.Amount) || 0,
-      callbackUrl: "http://localhost:3000/api/finalize-payment",
-      returnUrl: "http://localhost:3000/payment-success", 
+      callbackUrl: "https://paychangu-integration-demo.vercel.app/api/finalize-payment",
+      returnUrl: "https://paychangu-integration-demo.vercel.app/payment-success", 
     },
   });
 

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PayLoad test",
+  title: "StoreX",
   description: "Testing Paychangu integration",
 };
 
